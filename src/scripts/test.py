@@ -4,15 +4,15 @@ import math
 import sympy
 import numpy as np
 import matplotlib.pyplot as plt
+import threading
 
 DIR = './resources/ashlord00/images'
 # dir = pathlib.Path(DIR, '01119409-894e-4be0-a0a7-a804acbed38e.png')
-dir = pathlib.Path(DIR, '0b0611b4-fd91-48f3-a2b7-bb191aeb4e3d.png')
-
+dir = pathlib.Path(DIR, '2f9a5860-78bf-4f7f-83f1-5b40eabe64e7.png')
 my_img = cv2.imread(dir)
-my_img = cv2.cvtColor(my_img, cv2.COLOR_BGR2RGB)
-plt.imshow(my_img)
-plt.show()
+# my_img = cv2.cvtColor(my_img, cv2.COLOR_BGR2RGB)
+# plt.imshow(my_img)
+# plt.show()
 
 def largest_flat_region(img, y, x, k):
     '''Takes in the top-left corner (x,y) of a kxk region within an input image.
@@ -52,5 +52,14 @@ def get_pixel_size(img: np.ndarray) -> np.ndarray:
 
     return hypotheses[-1]
 
+def dumb_scale(img, ratio, interpolation):
+    h = int(img.shape[0] * ratio)
+    w = int(img.shape[1] * ratio)
+    return cv2.resize(img, (w,h), interpolation=interpolation)
 
-print(get_pixel_size(my_img))
+cv2.imshow('images', np.hstack([
+    dumb_scale(my_img[128:256,128:256], 5, cv2.INTER_LINEAR),
+    dumb_scale(my_img[128:256, 128:256], 5, cv2.INTER_NEAREST),
+]))
+cv2.waitKey(0)
+# print(get_pixel_size(my_img))
