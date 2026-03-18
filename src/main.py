@@ -1,0 +1,1 @@
+'deployment for already trained GAN'

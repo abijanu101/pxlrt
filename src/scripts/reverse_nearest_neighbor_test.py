@@ -52,14 +52,4 @@ def get_pixel_size(img: np.ndarray) -> np.ndarray:
 
     return hypotheses[-1]
 
-def dumb_scale(img, ratio, interpolation):
-    h = int(img.shape[0] * ratio)
-    w = int(img.shape[1] * ratio)
-    return cv2.resize(img, (w,h), interpolation=interpolation)
-
-cv2.imshow('images', np.hstack([
-    dumb_scale(my_img[128:256,128:256], 5, cv2.INTER_LINEAR),
-    dumb_scale(my_img[128:256, 128:256], 5, cv2.INTER_NEAREST),
-]))
-cv2.waitKey(0)
-# print(get_pixel_size(my_img))
+print(get_pixel_size(my_img))
