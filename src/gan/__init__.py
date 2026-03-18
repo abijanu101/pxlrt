@@ -1,0 +1,1 @@
+'public interface for exports of the gan module probably only exports the gan class with methods .load() .fit() and .generate()'
