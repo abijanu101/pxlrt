@@ -1,1 +1,1 @@
-'to be used for exporting the interface for the priority assignment agent, to be used in src/preprocessing/main.py'
+'to be used for exporting the interface for the priority assignment agent'

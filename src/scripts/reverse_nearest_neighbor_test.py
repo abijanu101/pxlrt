@@ -8,7 +8,7 @@ import threading
 
 DIR = './resources/ashlord00/images'
 # dir = pathlib.Path(DIR, '01119409-894e-4be0-a0a7-a804acbed38e.png')
-dir = pathlib.Path(DIR, '2f9a5860-78bf-4f7f-83f1-5b40eabe64e7.png')
+dir = pathlib.Path(DIR, '0a3c75bb-4bd0-47c8-a2ba-e2aee92ad43f.png')
 my_img = cv2.imread(dir)
 # my_img = cv2.cvtColor(my_img, cv2.COLOR_BGR2RGB)
 # plt.imshow(my_img)
@@ -28,7 +28,7 @@ def largest_flat_region(img, y, x, k):
     return k
 
 def get_pixel_size(img: np.ndarray) -> np.ndarray:
-    '''Find true pixel size for an upscaled image assuming no anti-aliasing'''
+    '''Find true pixel size for an upscaled image assuming nearest neighbour scaling by an integer factor'''
     
     h,w,_channels = img.shape
     d1 = set(sympy.divisors(h))
@@ -40,10 +40,12 @@ def get_pixel_size(img: np.ndarray) -> np.ndarray:
         j = 0
         while (j != w):
             if len(hypotheses) == 1:
-                print(i,j)
+                print('Potential fractional scaling at', i, j)
                 return 1
 
             c = largest_flat_region(img, i, j, hypotheses[-1])
+            print('Current largest hypothesis: ', hypotheses[-1])
+
             hypotheses = [hyp for hyp in hypotheses if hyp <= c]
 
             j -= j % hypotheses[-1]
