@@ -4,30 +4,16 @@ import cv2
 DIR = './resources/ashlord00/images'
 
 
-# =========================
-# INTENSITY OPERATORS
-# =========================
-
 def intensity_thing(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     cv2.imshow("intensity", gray)
 
-
-def inverted_intensity_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("inverted intensity", 255 - gray)
-
-
-# =========================
-# COLOR OPERATORS
-# =========================
 
 def channel_thing(img):
     b, g, r = cv2.split(img)
     cv2.imshow("blue", b)
     cv2.imshow("green", g)
     cv2.imshow("red", r)
-
 
 def color_range_thing(img):
     maxc = np.max(img, axis=2)
@@ -43,41 +29,6 @@ def color_novelty_thing(img):
     cv2.imshow("color novelty", score / (score.max() + 1e-6))
 
 
-# =========================
-# LOCAL STATISTICS
-# =========================
-
-def variance_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32)
-
-    mean = cv2.blur(gray, (7, 7))
-    mean2 = cv2.blur(gray ** 2, (7, 7))
-
-    var = mean2 - mean ** 2
-    cv2.imshow("local variance", var / (var.max() + 1e-6))
-
-
-def std_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32)
-
-    mean = cv2.blur(gray, (7, 7))
-    mean2 = cv2.blur(gray ** 2, (7, 7))
-
-    std = np.sqrt(mean2 - mean ** 2)
-    cv2.imshow("local std", std / (std.max() + 1e-6))
-
-
-# =========================
-# FREQUENCY / RESIDUAL
-# =========================
-
-def residual_thing(img):
-    base = cv2.GaussianBlur(img, (0, 0), 3)
-    detail = np.abs(img.astype(np.float32) - base.astype(np.float32))
-
-    cv2.imshow("gaussian residual", detail / (detail.max() + 1e-6))
-
-
 def dog_thing(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -86,33 +37,6 @@ def dog_thing(img):
 
     dog = g1 - g2
     cv2.imshow("DoG", dog / (np.max(np.abs(dog)) + 1e-6))
-
-
-# =========================
-# FFT OPERATORS
-# =========================
-
-def fft_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    f = np.fft.fft2(gray)
-    fshift = np.fft.fftshift(f)
-
-    mag = np.log1p(np.abs(fshift))
-    mag = mag / mag.max()
-
-    cv2.imshow("FFT magnitude", mag)
-
-
-def fft_spectrum_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    f = np.fft.fft2(gray)
-    fshift = np.fft.fftshift(f)
-
-    mag = np.log1p(np.abs(fshift))
-    cv2.imshow("FFT spectrum", mag / mag.max())
-
 
 def fft_lowpass_thing(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -134,43 +58,6 @@ def fft_lowpass_thing(img):
     cv2.imshow("FFT low-pass", recon / (recon.max() + 1e-6))
 
 
-def fft_highpass_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    f = np.fft.fft2(gray)
-    fshift = np.fft.fftshift(f)
-
-    h, w = gray.shape
-    mask = np.ones((h, w), np.uint8)
-
-    r = 30
-    cy, cx = h // 2, w // 2
-    mask[cy-r:cy+r, cx-r:cx+r] = 0
-
-    filtered = fshift * mask
-    recon = np.fft.ifft2(np.fft.ifftshift(filtered))
-    recon = np.abs(recon)
-
-    cv2.imshow("FFT high-pass", recon / (recon.max() + 1e-6))
-
-
-# =========================
-# PALETTE OPERATORS
-# =========================
-
-def palette_thing(img):
-    data = img.reshape(-1, 3).astype(np.float32)
-
-    _, labels, centers = cv2.kmeans(
-        data, 3, None,
-        (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 20, 1.0),
-        5, cv2.KMEANS_RANDOM_CENTERS
-    )
-
-    out = centers[labels.flatten()].reshape(img.shape)
-    cv2.imshow("palette reconstruction", out.astype(np.uint8))
-
-
 def kmeans_error_thing(img):
     data = img.reshape(-1, 3).astype(np.float32)
 
@@ -186,28 +73,6 @@ def kmeans_error_thing(img):
     cv2.imshow("palette error", error / (error.max() + 1e-6))
 
 
-# =========================
-# STRUCTURE OPERATORS
-# =========================
-
-def canny_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    edges = cv2.Canny(gray, 200, 250)
-    cv2.imshow("canny edges", edges)
-
-
-def edge_density_thing(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    edges = cv2.Canny(gray, 200, 250)
-
-    density = cv2.GaussianBlur(edges.astype(np.float32), (5, 5), 1)
-    cv2.imshow("edge density", density / (density.max() + 1e-6))
-
-
-# =========================
-# PIXEL-ART OPERATORS
-# =========================
-
 def block_variance_thing(img, block=8):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -221,7 +86,6 @@ def block_variance_thing(img, block=8):
 
     cv2.imshow("block variance", out / (out.max() + 1e-6))
 
-
 def neighbor_contrast_thing(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32)
 
@@ -234,38 +98,196 @@ def neighbor_contrast_thing(img):
 
     cv2.imshow("neighbor contrast", contrast / (contrast.max() + 1e-6))
 
+def distance_transform_thing(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    edges = cv2.Canny(gray, 100, 200)
+    inv = 255 - edges
+
+    dist = cv2.distanceTransform(inv, cv2.DIST_L2, 5)
+
+    cv2.imshow(
+        "distance transform",
+        dist / (dist.max() + 1e-6)
+    )
+
+def connected_components_thing(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    _, binary = cv2.threshold(
+        gray,
+        0,
+        255,
+        cv2.THRESH_BINARY + cv2.THRESH_OTSU
+    )
+
+    num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(binary)
+
+    out = np.zeros_like(gray, dtype=np.float32)
+
+    for i in range(1, num_labels):
+        area = stats[i, cv2.CC_STAT_AREA]
+        out[labels == i] = area
+
+    cv2.imshow(
+        "connected component area",
+        out / (out.max() + 1e-6)
+    )
+
+def multiscale_block_variance_thing(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    scales = [4, 8, 16, 32]
+
+    accum = np.zeros_like(gray, dtype=np.float32)
+
+    for block in scales:
+        h, w = gray.shape
+        out = np.zeros_like(gray, dtype=np.float32)
+
+        for y in range(0, h, block):
+            for x in range(0, w, block):
+                patch = gray[y:y+block, x:x+block]
+                out[y:y+block, x:x+block] = patch.std()
+
+        accum += out
+
+    cv2.imshow(
+        "multiscale block variance",
+        accum / (accum.max() + 1e-6)
+    )
+
+def regional_isolation_thing(img):
+    h, w = img.shape[:2]
+
+    # scale factor instead of fixed size
+    scale = 0.25  # 25% resolution (tunable)
+
+    new_w = max(8, int(w * scale))
+    new_h = max(8, int(h * scale))
+
+    small = cv2.resize(
+        img,
+        (new_w, new_h),
+        interpolation=cv2.INTER_NEAREST
+    )
+
+    blur = cv2.GaussianBlur(
+        small,
+        (0, 0),
+        5
+    )
+
+    diff = np.linalg.norm(
+        small.astype(np.float32) - blur.astype(np.float32),
+        axis=2
+    )
+
+    diff = cv2.resize(
+        diff,
+        (w, h),
+        interpolation=cv2.INTER_NEAREST
+    )
+
+    cv2.imshow(
+        "regional isolation (scale-aware)",
+        diff / (diff.max() + 1e-6)
+    )
+
+def local_mi_thing(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (0, 0), 2)
+
+    mi = gray.astype(np.float32) * blur.astype(np.float32)
+
+    cv2.imshow("local MI proxy", mi / (mi.max() + 1e-6))
+
+
+def fft_lowpass_multiscale_variance_thing(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).astype(np.float32)
+
+    # -------------------------
+    # FFT low-pass reconstruction
+    # -------------------------
+    f = np.fft.fft2(gray)
+    fshift = np.fft.fftshift(f)
+
+    h, w = gray.shape
+    cy, cx = h // 2, w // 2
+
+    mask = np.zeros((h, w), np.uint8)
+
+    # scale cutoff relative to image size (important fix)
+    r = min(h, w) // 12
+    mask[cy - r:cy + r, cx - r:cx + r] = 1
+
+    low_freq = fshift * mask
+    recon = np.fft.ifft2(np.fft.ifftshift(low_freq))
+    recon = np.abs(recon).astype(np.float32)
+
+    recon_norm = recon / (recon.max() + 1e-6)
+
+    cv2.imshow("fft lowpass", recon_norm)
+
+    # -------------------------
+    # residual (optional but useful)
+    # -------------------------
+    residual = np.abs(gray - recon)
+    residual = residual / (residual.max() + 1e-6)
+    cv2.imshow("fft residual", residual)
+
+    # -------------------------
+    # multiscale variance on lowpass
+    # -------------------------
+    h, w = recon.shape
+
+    scales = [
+        max(4, min(h, w) // 64),
+        max(8, min(h, w) // 32),
+        max(16, min(h, w) // 16),
+        max(32, min(h, w) // 8),
+    ]
+
+    out = np.zeros_like(recon, dtype=np.float32)
+
+    for s in scales:
+        for y in range(0, h, s):
+            for x in range(0, w, s):
+                patch = recon[y:y+s, x:x+s]
+                out[y:y+s, x:x+s] = patch.std()
+
+    out = out / (out.max() + 1e-6)
+
+    cv2.imshow("fft lowpass + multiscale variance", out)
+
 
 # =========================
 # OPERATOR BANK
 # =========================
 
+
 OPERATORS = [
-    # canny_thing,
-    # edge_density_thing,
+    fft_lowpass_multiscale_variance_thing
+    # # Color Based Activation Maps
+    # color_range_thing,
+    # color_novelty_thing,
+    # kmeans_error_thing,
 
+    # # Edge and Texture
+    # block_variance_thing,
+    # multiscale_block_variance_thing,
+    # neighbor_contrast_thing,
+
+    # # Unique
+    # distance_transform_thing,
+    # regional_isolation_thing,
+    # local_mi_thing,
+
+    # # Experimental (useless alone, probably need an abs(z_scores(img)).)
     # intensity_thing,
-    # inverted_intensity_thing,
-
-    # channel_thing,
-    color_range_thing,
-    color_novelty_thing,
-
-    variance_thing,
-    # std_thing,
-
-    # residual_thing,
-    dog_thing,
-
-    # fft_thing,
-    # fft_spectrum_thing,
-    fft_lowpass_thing,
-    fft_highpass_thing,
-
-    palette_thing,
-    kmeans_error_thing,
-
-    block_variance_thing,
-    neighbor_contrast_thing
+    # dog_thing,
+    # fft_lowpass_thing,
+    # connected_components_thing,
 ]
 
 
@@ -282,6 +304,8 @@ def playingAround(path):
     cv2.imshow("original", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+
 
 
 # =========================
@@ -303,7 +327,13 @@ imgs = [
     DIR + '/849b63ae-b47b-4b65-a892-87a32e3ffcd8.png',
     DIR + '/228661ff-79ae-4c45-bff0-84d0e19207b3.png',
     DIR + '/288112c3-64c7-4fef-89f6-6e8e7da48e13.png',
-    DIR + '/01119409-894e-4be0-a0a7-a804acbed38e.png'
+    DIR + "/0b4f83ac-fc76-434a-95d8-853a472f386a.png",
+    
+    DIR + "/02ff04e4-f65c-44bd-8c7f-9d9a41ecdb79.png",
+    DIR + "/e0d0c74b-d6ba-42d5-a6c1-bbaedc14ff7e.png",
+    DIR + "/ffc6459a-b287-4707-bda3-31e8e8168d20.png",
+    DIR + "/40675b7e-5c87-45b2-b3ef-dfd63dc5ea19.png",
+    # DIR + "/01119409-894e-4be0-a0a7-a804acbed38e.png"
 ]
 
 
