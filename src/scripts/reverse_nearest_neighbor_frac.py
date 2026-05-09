@@ -18,7 +18,7 @@ def show_different_scales(path):
             interpolation=cv2.INTER_NEAREST
         )
 
-    potential_sizes = [4,5,6,7]
+    potential_sizes = [5.21]
     
     for s in potential_sizes:
         cv2.imshow(f'rescaled x{s}', scale_rescale(img, s))
