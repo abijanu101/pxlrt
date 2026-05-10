@@ -9,15 +9,15 @@ project_root = str(Path(__file__).parent.parent.parent)
 if project_root not in sys.path:
     sys.path.append(project_root)
 
-from src.cropper.config import (TEST_IMAGE_DIR, OUTPUT_DIR, DATASET_DIR, 
+from src.preprocessing.cropper.config import (TEST_IMAGE_DIR, OUTPUT_DIR, DATASET_DIR, 
                                GAN_INPUT_SIZE, MIN_VALID_SCORE_THRESHOLD, 
                                REJECT_EMPTY_THRESHOLD, NATIVE_SCALING_FACTOR)
-from src.cropper.utils import calculate_color_novelty, calculate_integral_image
-from src.cropper.proposal import RegionProposer
-from src.cropper.optimize import RegionOptimizer
-from src.cropper.filter import RegionFilter
-from src.cropper.normalize import RegionNormalizer
-from src.cropper.export import DatasetExporter
+from src.preprocessing.cropper.utils import calculate_color_novelty, calculate_integral_image
+from src.preprocessing.cropper.proposal import RegionProposer
+from src.preprocessing.cropper.optimize import RegionOptimizer
+from src.preprocessing.cropper.filter import RegionFilter
+from src.preprocessing.cropper.normalize import RegionNormalizer
+from src.preprocessing.cropper.export import DatasetExporter
 
 def main():
     # Setup paths

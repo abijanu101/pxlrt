@@ -13,3 +13,9 @@ def get_region_score(integral_image: np.ndarray, x: int, y: int, w: int, h: int)
                   integral_image[y1, x1])
     area = w * h
     return region_sum / area if area > 0 else 0
+
+def calculate_color_novelty(img: np.ndarray) -> np.ndarray:
+    mean_color = img.reshape(-1, 3).mean(axis=0)
+    diff = img.astype(np.float32) - mean_color
+    score = np.linalg.norm(diff, axis=2)
+    return score / (score.max() + 1e-6)

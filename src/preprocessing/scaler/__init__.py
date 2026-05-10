@@ -1,3 +1,3 @@
-from .scaler import get_scaled
+from .scaler import scale_image
 
-__all__ = ['get_scaled']
+__all__ = ['scale_image']

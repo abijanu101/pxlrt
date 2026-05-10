@@ -24,5 +24,7 @@ MIN_VALID_SCORE_THRESHOLD = 0.20
 REJECT_EMPTY_THRESHOLD = 0.05
 
 # Paths
+TEST_IMAGE_DIR = "resources/ashlord00"
+OUTPUT_DIR = "output/debug_cropper"
 DATASET_DIR = "output/dataset"
 DEBUG_DIR = "output/debug_preprocessing"

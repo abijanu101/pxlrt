@@ -1,8 +1,9 @@
 import numpy as np
 import cv2
-import filter_bank as fb
+import src.preprocessing.masker.filter_bank as fb
+import logging
 
-def generate_priority_mask(img: np.ndarray) -> np.ndarray:
+def generate_priority_mask(img: np.ndarray, save_path: str = None) -> np.ndarray:
     """
     Returns a heatmap for areas of relative importance based on color novelty.
     Areas with colors far from the mean are considered more 'novel'.
@@ -33,8 +34,23 @@ def generate_priority_mask(img: np.ndarray) -> np.ndarray:
     for weight, filter in weighted_maps:
         accum += weight * fb.multiscale_block_variance(filter)
         
-    return accum / (accum.max() + 1e-6)
+    final_mask = accum / (accum.max() + 1e-6)
 
+    # Estimate detected regions by thresholding the mask
+    threshold_val = 0.25 # arbitrary hot threshold
+    binary_mask = (final_mask > threshold_val).astype(np.uint8) * 255
+    num_labels, _, _, _ = cv2.connectedComponentsWithStats(binary_mask)
+    num_regions = max(0, num_labels - 1) # subtract 1 for background
+    
+    logging.info(f"Masker detected {num_regions} distinct priority regions above threshold.")
+
+    if save_path:
+        # Convert mask (0-1) to an 8-bit heatmap image
+        heatmap = cv2.applyColorMap((final_mask * 255).astype(np.uint8), cv2.COLORMAP_JET)
+        cv2.imwrite(save_path, heatmap)
+        logging.info(f"Saved priority mask debug image to: {save_path}")
+
+    return final_mask
 
 # playground
 
