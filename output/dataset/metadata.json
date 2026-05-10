@@ -1,0 +1,482 @@
+{
+    "sample_0001": {
+        "source_image": "000b7b74-0a22-4d0c-b717-e240fdc5d555.png",
+        "bbox": [
+            34,
+            48,
+            32,
+            32
+        ],
+        "score": 0.7097,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.9679,
+            "max": 1.0
+        },
+        "filename": "sample_0001.png"
+    },
+    "sample_0002": {
+        "source_image": "000b7b74-0a22-4d0c-b717-e240fdc5d555.png",
+        "bbox": [
+            26,
+            40,
+            34,
+            34
+        ],
+        "score": 0.6936,
+        "scale_used": 1,
+        "initial_size": [
+            34,
+            34
+        ],
+        "importance_stats": {
+            "mean": 0.9529,
+            "max": 1.0
+        },
+        "filename": "sample_0002.png"
+    },
+    "sample_0003": {
+        "source_image": "000b7b74-0a22-4d0c-b717-e240fdc5d555.png",
+        "bbox": [
+            26,
+            54,
+            32,
+            32
+        ],
+        "score": 0.6772,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.9277,
+            "max": 1.0
+        },
+        "filename": "sample_0003.png"
+    },
+    "sample_0004": {
+        "source_image": "000b7b74-0a22-4d0c-b717-e240fdc5d555.png",
+        "bbox": [
+            32,
+            32,
+            28,
+            28
+        ],
+        "score": 0.6768,
+        "scale_used": 2,
+        "initial_size": [
+            28,
+            28
+        ],
+        "importance_stats": {
+            "mean": 0.9286,
+            "max": 1.0
+        },
+        "filename": "sample_0004.png"
+    },
+    "sample_0005": {
+        "source_image": "000b7b74-0a22-4d0c-b717-e240fdc5d555.png",
+        "bbox": [
+            32,
+            20,
+            64,
+            64
+        ],
+        "score": 0.6298,
+        "scale_used": 1,
+        "initial_size": [
+            64,
+            64
+        ],
+        "importance_stats": {
+            "mean": 0.878,
+            "max": 1.0
+        },
+        "filename": "sample_0005.png"
+    },
+    "sample_0006": {
+        "source_image": "0049a37b-76a2-49bf-9075-adb497a74266.png",
+        "bbox": [
+            0,
+            56,
+            28,
+            28
+        ],
+        "score": 0.6835,
+        "scale_used": 2,
+        "initial_size": [
+            28,
+            28
+        ],
+        "importance_stats": {
+            "mean": 0.9331,
+            "max": 1.0
+        },
+        "filename": "sample_0006.png"
+    },
+    "sample_0007": {
+        "source_image": "0049a37b-76a2-49bf-9075-adb497a74266.png",
+        "bbox": [
+            0,
+            72,
+            28,
+            28
+        ],
+        "score": 0.5829,
+        "scale_used": 2,
+        "initial_size": [
+            28,
+            28
+        ],
+        "importance_stats": {
+            "mean": 0.8066,
+            "max": 1.0
+        },
+        "filename": "sample_0007.png"
+    },
+    "sample_0008": {
+        "source_image": "0049a37b-76a2-49bf-9075-adb497a74266.png",
+        "bbox": [
+            0,
+            44,
+            32,
+            32
+        ],
+        "score": 0.557,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.7558,
+            "max": 1.0
+        },
+        "filename": "sample_0008.png"
+    },
+    "sample_0009": {
+        "source_image": "0049a37b-76a2-49bf-9075-adb497a74266.png",
+        "bbox": [
+            4,
+            64,
+            32,
+            32
+        ],
+        "score": 0.5514,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.7687,
+            "max": 1.0
+        },
+        "filename": "sample_0009.png"
+    },
+    "sample_0010": {
+        "source_image": "0049a37b-76a2-49bf-9075-adb497a74266.png",
+        "bbox": [
+            64,
+            0,
+            32,
+            32
+        ],
+        "score": 0.5159,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.7457,
+            "max": 1.0
+        },
+        "filename": "sample_0010.png"
+    },
+    "sample_0011": {
+        "source_image": "0049a37b-76a2-49bf-9075-adb497a74266.png",
+        "bbox": [
+            0,
+            48,
+            44,
+            44
+        ],
+        "score": 0.5079,
+        "scale_used": 1,
+        "initial_size": [
+            44,
+            44
+        ],
+        "importance_stats": {
+            "mean": 0.678,
+            "max": 1.0
+        },
+        "filename": "sample_0011.png"
+    },
+    "sample_0012": {
+        "source_image": "0049a37b-76a2-49bf-9075-adb497a74266.png",
+        "bbox": [
+            64,
+            56,
+            32,
+            32
+        ],
+        "score": 0.469,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.635,
+            "max": 0.785
+        },
+        "filename": "sample_0012.png"
+    },
+    "sample_0013": {
+        "source_image": "007d6097-ed1b-4183-af99-f7dff5eae967.png",
+        "bbox": [
+            58,
+            58,
+            32,
+            32
+        ],
+        "score": 0.6128,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.83,
+            "max": 1.0
+        },
+        "filename": "sample_0013.png"
+    },
+    "sample_0014": {
+        "source_image": "007d6097-ed1b-4183-af99-f7dff5eae967.png",
+        "bbox": [
+            38,
+            42,
+            32,
+            32
+        ],
+        "score": 0.5992,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.8137,
+            "max": 1.0
+        },
+        "filename": "sample_0014.png"
+    },
+    "sample_0015": {
+        "source_image": "007d6097-ed1b-4183-af99-f7dff5eae967.png",
+        "bbox": [
+            50,
+            48,
+            34,
+            34
+        ],
+        "score": 0.5979,
+        "scale_used": 1,
+        "initial_size": [
+            34,
+            34
+        ],
+        "importance_stats": {
+            "mean": 0.8323,
+            "max": 1.0
+        },
+        "filename": "sample_0015.png"
+    },
+    "sample_0016": {
+        "source_image": "007d6097-ed1b-4183-af99-f7dff5eae967.png",
+        "bbox": [
+            30,
+            8,
+            30,
+            30
+        ],
+        "score": 0.5959,
+        "scale_used": 2,
+        "initial_size": [
+            30,
+            30
+        ],
+        "importance_stats": {
+            "mean": 0.8163,
+            "max": 1.0
+        },
+        "filename": "sample_0016.png"
+    },
+    "sample_0017": {
+        "source_image": "007d6097-ed1b-4183-af99-f7dff5eae967.png",
+        "bbox": [
+            62,
+            50,
+            32,
+            32
+        ],
+        "score": 0.5857,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.8271,
+            "max": 1.0
+        },
+        "filename": "sample_0017.png"
+    },
+    "sample_0018": {
+        "source_image": "007d6097-ed1b-4183-af99-f7dff5eae967.png",
+        "bbox": [
+            56,
+            30,
+            34,
+            34
+        ],
+        "score": 0.5803,
+        "scale_used": 1,
+        "initial_size": [
+            34,
+            34
+        ],
+        "importance_stats": {
+            "mean": 0.7979,
+            "max": 1.0
+        },
+        "filename": "sample_0018.png"
+    },
+    "sample_0019": {
+        "source_image": "007d6097-ed1b-4183-af99-f7dff5eae967.png",
+        "bbox": [
+            22,
+            40,
+            34,
+            34
+        ],
+        "score": 0.5776,
+        "scale_used": 1,
+        "initial_size": [
+            34,
+            34
+        ],
+        "importance_stats": {
+            "mean": 0.7911,
+            "max": 1.0
+        },
+        "filename": "sample_0019.png"
+    },
+    "sample_0020": {
+        "source_image": "008a493e-9801-4ffc-a2ec-823256a32aa4.png",
+        "bbox": [
+            64,
+            80,
+            28,
+            28
+        ],
+        "score": 0.614,
+        "scale_used": 2,
+        "initial_size": [
+            28,
+            28
+        ],
+        "importance_stats": {
+            "mean": 0.8271,
+            "max": 1.0
+        },
+        "filename": "sample_0020.png"
+    },
+    "sample_0021": {
+        "source_image": "008a493e-9801-4ffc-a2ec-823256a32aa4.png",
+        "bbox": [
+            52,
+            80,
+            32,
+            32
+        ],
+        "score": 0.5578,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.741,
+            "max": 1.0
+        },
+        "filename": "sample_0021.png"
+    },
+    "sample_0022": {
+        "source_image": "008a493e-9801-4ffc-a2ec-823256a32aa4.png",
+        "bbox": [
+            56,
+            68,
+            32,
+            32
+        ],
+        "score": 0.5342,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.7361,
+            "max": 1.0
+        },
+        "filename": "sample_0022.png"
+    },
+    "sample_0023": {
+        "source_image": "008a493e-9801-4ffc-a2ec-823256a32aa4.png",
+        "bbox": [
+            64,
+            92,
+            32,
+            32
+        ],
+        "score": 0.5155,
+        "scale_used": 2,
+        "initial_size": [
+            32,
+            32
+        ],
+        "importance_stats": {
+            "mean": 0.716,
+            "max": 1.0
+        },
+        "filename": "sample_0023.png"
+    },
+    "sample_0024": {
+        "source_image": "008a493e-9801-4ffc-a2ec-823256a32aa4.png",
+        "bbox": [
+            50,
+            72,
+            46,
+            46
+        ],
+        "score": 0.5091,
+        "scale_used": 1,
+        "initial_size": [
+            46,
+            46
+        ],
+        "importance_stats": {
+            "mean": 0.6734,
+            "max": 1.0
+        },
+        "filename": "sample_0024.png"
+    }
+}

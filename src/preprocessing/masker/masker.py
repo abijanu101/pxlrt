@@ -3,7 +3,13 @@ import cv2
 import filter_bank as fb
 
 def generate_priority_mask(img: np.ndarray) -> np.ndarray:
-    'Returns a heatmap for areas of relative importance based on trends in color and texture variance'
+    """
+    Returns a heatmap for areas of relative importance based on color novelty.
+    Areas with colors far from the mean are considered more 'novel'.
+    """
+    mean_color = img.reshape(-1, 3).mean(axis=0)
+    diff = img.astype(np.float32) - mean_color
+    score = np.linalg.norm(diff, axis=2)
     
     weighted_maps = [
         (1.2, fb.fft_lowpass(img)),
