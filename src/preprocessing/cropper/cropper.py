@@ -5,7 +5,8 @@ from src.preprocessing.cropper.proposal import RegionProposer
 from src.preprocessing.cropper.optimize import RegionOptimizer
 from src.preprocessing.cropper.filter import RegionFilter
 from src.preprocessing.cropper.normalize import RegionNormalizer
-from src.preprocessing.cropper.config import GAN_INPUT_SIZE, MIN_VALID_SCORE_THRESHOLD, REJECT_EMPTY_THRESHOLD
+from src.config.shared_config import GAN_INPUT_SIZE
+from src.preprocessing.cropper.config import MIN_VALID_SCORE_THRESHOLD, REJECT_EMPTY_THRESHOLD
 
 def extract_priority_regions(img: np.ndarray, importance_map: np.ndarray) -> list:
     """
@@ -26,7 +27,7 @@ def extract_priority_regions(img: np.ndarray, importance_map: np.ndarray) -> lis
     filtered = filterer.apply_nms(optimized, importance_map)
     final_regions = filterer.apply_diversity_balancing(filtered)
     
-    return final_regions
+    return initial_proposals, final_regions
 
 import os
 import uuid

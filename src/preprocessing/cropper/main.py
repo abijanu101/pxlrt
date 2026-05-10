@@ -4,14 +4,15 @@ import numpy as np
 import sys
 from pathlib import Path
 
-# Add project root to sys.path to allow relative imports
-project_root = str(Path(__file__).parent.parent.parent)
+# Add project root (workspace root) to sys.path to allow absolute imports from the src package
+project_root = str(Path(__file__).parents[3])  # workspace root
 if project_root not in sys.path:
     sys.path.append(project_root)
 
-from src.preprocessing.cropper.config import (TEST_IMAGE_DIR, OUTPUT_DIR, DATASET_DIR, 
-                               GAN_INPUT_SIZE, MIN_VALID_SCORE_THRESHOLD, 
-                               REJECT_EMPTY_THRESHOLD, NATIVE_SCALING_FACTOR)
+# Now import using the src package path
+from src.config.shared_config import (TEST_IMAGE_DIR, DEBUG_DIR, DATASET_DIR,
+                                      GAN_INPUT_SIZE, NATIVE_SCALING_FACTOR)
+from src.preprocessing.cropper.config import (MIN_VALID_SCORE_THRESHOLD, REJECT_EMPTY_THRESHOLD)
 from src.preprocessing.cropper.utils import calculate_color_novelty, calculate_integral_image
 from src.preprocessing.cropper.proposal import RegionProposer
 from src.preprocessing.cropper.optimize import RegionOptimizer
@@ -22,9 +23,9 @@ from src.preprocessing.cropper.export import DatasetExporter
 def main():
     # Setup paths
     image_dir = Path(TEST_IMAGE_DIR)
-    output_dir = Path(OUTPUT_DIR)
+    debug_dir = Path(DEBUG_DIR)
     dataset_dir = Path(DATASET_DIR)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    debug_dir.mkdir(parents=True, exist_ok=True)
     
     # Load test images
     all_files = sorted([f for f in os.listdir(image_dir) if f.endswith('.png')])
@@ -130,12 +131,14 @@ def main():
             # Ensure they are all the same size (they should be)
             preview_strip = np.hstack(previews)
             # Add padding to match original image height if needed for hstack
-            h_orig = img.shape[0]
+            h_vis = img.shape[0]
             h_pre = preview_strip.shape[0]
-            if h_pre < h_orig:
-                pad = np.zeros((h_orig - h_pre, preview_strip.shape[1], 3), dtype=np.uint8)
+            if h_pre < h_vis:
+                pad = np.zeros((h_vis - h_pre, preview_strip.shape[1], 3), dtype=np.uint8)
                 preview_strip = np.vstack([preview_strip, pad])
-            
+            # Resize preview strip to match vis_display height (which is native resolution)
+            if preview_strip.shape[0] != vis_display.shape[0]:
+                preview_strip = cv2.resize(preview_strip, (preview_strip.shape[1], vis_display.shape[0]), interpolation=cv2.INTER_NEAREST)
             # Save debug view
             combined = np.hstack([vis_display, preview_strip[:, :vis_display.shape[1]]])
             
@@ -145,7 +148,7 @@ def main():
             combined_up = cv2.resize(combined, (w_vis * upscale_factor, h_vis * upscale_factor), 
                                      interpolation=cv2.INTER_NEAREST)
             
-            save_path = output_dir / f"final_{filename}"
+            save_path = debug_dir / f"final_{filename}"
             cv2.imwrite(str(save_path), combined_up)
             print(f"Saved upscaled final debug visualization to {save_path}")
 

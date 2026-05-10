@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from .config import GAN_INPUT_SIZE
+from src.config.shared_config import GAN_INPUT_SIZE
 
 def extract_crop(img: np.ndarray, bbox: tuple) -> np.ndarray:
     """Extracts a crop from the image using slicing."""
@@ -27,29 +27,17 @@ def handle_integer_upscaling(crop: np.ndarray, target_size: int) -> np.ndarray:
 
 def normalize_to_canvas(crop: np.ndarray, target_size: int) -> np.ndarray:
     """
-    Centers the crop on a fixed-size black canvas.
-    Handles both smaller-than and larger-than cases safely.
+    Resizes the crop to exactly fill the target canvas using nearest-neighbor
+    interpolation to preserve pixel-art sharpness. No black padding.
     """
     h, w = crop.shape[:2]
     
-    # If crop is larger than canvas, center-crop it first
-    if h > target_size or w > target_size:
-        start_y = max(0, (h - target_size) // 2)
-        start_x = max(0, (w - target_size) // 2)
-        crop = crop[start_y:start_y+target_size, start_x:start_x+target_size]
-        h, w = crop.shape[:2]
-
-    # Create empty canvas
-    canvas = np.zeros((target_size, target_size, 3), dtype=np.uint8)
+    # If already the right size, return as-is
+    if h == target_size and w == target_size:
+        return crop
     
-    # Calculate offsets for centering
-    off_y = (target_size - h) // 2
-    off_x = (target_size - w) // 2
-    
-    # Place crop on canvas
-    canvas[off_y:off_y+h, off_x:off_x+w] = crop
-    
-    return canvas
+    # Resize to exactly fill the canvas using nearest-neighbor (pixel-perfect)
+    return cv2.resize(crop, (target_size, target_size), interpolation=cv2.INTER_NEAREST)
 
 class RegionNormalizer:
     """

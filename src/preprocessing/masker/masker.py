@@ -36,9 +36,9 @@ def generate_priority_mask(img: np.ndarray, save_path: str = None) -> np.ndarray
         
     final_mask = accum / (accum.max() + 1e-6)
 
+    from src.preprocessing.masker.config import HOT_THRESHOLD
     # Estimate detected regions by thresholding the mask
-    threshold_val = 0.25 # arbitrary hot threshold
-    binary_mask = (final_mask > threshold_val).astype(np.uint8) * 255
+    binary_mask = (final_mask > HOT_THRESHOLD).astype(np.uint8) * 255
     num_labels, _, _, _ = cv2.connectedComponentsWithStats(binary_mask)
     num_regions = max(0, num_labels - 1) # subtract 1 for background
     
