@@ -8,10 +8,6 @@ def generate_priority_mask(img: np.ndarray, save_path: str = None) -> np.ndarray
     Returns a heatmap for areas of relative importance based on color novelty.
     Areas with colors far from the mean are considered more 'novel'.
     """
-    mean_color = img.reshape(-1, 3).mean(axis=0)
-    diff = img.astype(np.float32) - mean_color
-    score = np.linalg.norm(diff, axis=2)
-    
     weighted_maps = [
         (1.2, fb.fft_lowpass(img)),
         (1.3, fb.pseudo_mutual_information(img)),
@@ -56,7 +52,6 @@ def generate_priority_mask(img: np.ndarray, save_path: str = None) -> np.ndarray
 
 if __name__ == '__main__':
     DIR = './resources/ashlord00/images'
-
     imgs = [
         DIR + '/464a4159-95fa-492e-9227-517ec3a425b9.png',
         DIR + '/3ed3c7ce-e0ca-4625-b792-2cc86a6632fc.png',
@@ -80,6 +75,9 @@ if __name__ == '__main__':
         DIR + "/40675b7e-5c87-45b2-b3ef-dfd63dc5ea19.png",
         DIR + "/01119409-894e-4be0-a0a7-a804acbed38e.png"
     ]
+    import os
+    imgs = [DIR + '/' + i for i in os.listdir(DIR)]
+
     for path in imgs:
         img = cv2.imread(path)
         pm = generate_priority_mask(img)
