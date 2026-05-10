@@ -5,7 +5,7 @@ TEST_IMAGE_DIR = "resources/ashlord00"
 DEBUG_DIR = "debug"
 
 # GAN and Window Configuration
-GAN_INPUT_SIZE = 128
+GAN_INPUT_SIZE = 64
 NATIVE_SCALING_FACTOR = 5.306
 WINDOW_SIZES = [64]  # Fixed window size for consistent 64x64 proposals
 WINDOW_STEP = 8
