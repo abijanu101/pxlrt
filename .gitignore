@@ -1,5 +1,8 @@
-resources/ashlord00/*
 venv
 __pycache__
+
+resources/ashlord00/*
 resources/64x64/images
 resources/128x128/images
+
+samples/

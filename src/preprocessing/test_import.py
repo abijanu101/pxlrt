@@ -11,8 +11,8 @@ sys.path.append(project_root)
 print(f"Sys Path: {sys.path}")
 
 try:
-    import src.preprocessing.cropper.config as cfg
-    print("Successfully imported src.cropper.config")
-    print(f"NATIVE_SCALING_FACTOR: {cfg.NATIVE_SCALING_FACTOR}")
+    import src.config.scaler as cfg
+    print("Successfully imported src.config.scaler")
+    print(f"SCALING_FACTOR: {cfg.SCALING_FACTOR}")
 except Exception as e:
     print(f"Failed to import: {e}")

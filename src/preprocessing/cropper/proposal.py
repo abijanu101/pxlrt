@@ -1,6 +1,6 @@
 from typing import List, Dict
 import numpy as np
-from src.config.shared_config import WINDOW_SIZES, WINDOW_STEP
+from src.config.cropper import WINDOW_SIZES, WINDOW_STEP
 from src.preprocessing.cropper.config import MIN_IMPORTANCE_SCORE
 from .utils import get_region_score
 

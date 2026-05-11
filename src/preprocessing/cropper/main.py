@@ -10,8 +10,9 @@ if project_root not in sys.path:
     sys.path.append(project_root)
 
 # Now import using the src package path
-from src.config.shared_config import (TEST_IMAGE_DIR, DEBUG_DIR, DATASET_DIR,
-                                      GAN_INPUT_SIZE, NATIVE_SCALING_FACTOR)
+from src.config.shared_config import TEST_IMAGE_DIR, DEBUG_DIR, DATASET_DIR
+from src.config.gan import GAN_INPUT_SIZE
+from src.config.scaler import SCALING_FACTOR
 from src.preprocessing.cropper.config import (MIN_VALID_SCORE_THRESHOLD, REJECT_EMPTY_THRESHOLD)
 from src.preprocessing.cropper.utils import calculate_color_novelty, calculate_integral_image
 from src.preprocessing.cropper.proposal import RegionProposer
@@ -55,8 +56,8 @@ def main():
         
         # 0. Pre-process: Downscale to native resolution
         h_orig, w_orig = img.shape[:2]
-        w_native = round(w_orig / NATIVE_SCALING_FACTOR)
-        h_native = round(h_orig / NATIVE_SCALING_FACTOR)
+        w_native = round(w_orig / SCALING_FACTOR)
+        h_native = round(h_orig / SCALING_FACTOR)
         img = cv2.resize(img, (w_native, h_native), interpolation=cv2.INTER_NEAREST)
         print(f"Downscaled to native resolution: {w_native}x{h_native}")
         
@@ -144,7 +145,7 @@ def main():
             
             # Upscale for better visibility (eyes) while keeping pixel art sharp
             h_vis, w_vis = combined.shape[:2]
-            upscale_factor = int(round(NATIVE_SCALING_FACTOR))
+            upscale_factor = int(round(SCALING_FACTOR))
             combined_up = cv2.resize(combined, (w_vis * upscale_factor, h_vis * upscale_factor), 
                                      interpolation=cv2.INTER_NEAREST)
             

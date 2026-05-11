@@ -14,8 +14,9 @@ from src.preprocessing.scaler import scale_image
 from src.preprocessing.masker import generate_priority_mask
 from src.preprocessing.cropper import extract_priority_regions, crop_regions
 from src.preprocessing.cropper.export import DatasetExporter
-from src.config.shared_config import (DATASET_DIR, TEST_IMAGE_DIR, SCALE_FACTOR, NATIVE_SCALING_FACTOR,
+from src.config.shared_config import (DATASET_DIR, TEST_IMAGE_DIR,
                                       VALIDATION_MODE, VALIDATION_SAMPLE_COUNT, VERBOSE_LOGGING, DEBUG_DIR)
+from src.config.scaler import SCALING_FACTOR
 
 # Set logging level dynamically based on validation settings
 for handler in logging.root.handlers[:]:
@@ -66,7 +67,7 @@ def run_pipeline():
             
             # 1. Scaler
             scaled_save_path = str(debug_dir / f"{filename.split('.')[0]}_scaled.png") if debug_dir else None
-            native_img = scale_image(str(path), scale_factor=SCALE_FACTOR, save_path=scaled_save_path)
+            native_img = scale_image(str(path), scale_factor=SCALING_FACTOR, save_path=scaled_save_path)
             h_new, w_new = native_img.shape[:2]
             
             if VALIDATION_MODE:
@@ -113,7 +114,7 @@ def run_pipeline():
                     cv2.rectangle(vis_final, (x, y), (x+w, y+h), (0, 255, 0), 2)
                     
                 # Upscale for better visibility (eyes) while keeping pixel art sharp
-                upscale_factor = int(round(NATIVE_SCALING_FACTOR))
+                upscale_factor = int(round(SCALING_FACTOR))
                 h_vis, w_vis = native_img.shape[:2]
                 vis_initial_up = cv2.resize(vis_initial, (w_vis * upscale_factor, h_vis * upscale_factor), interpolation=cv2.INTER_NEAREST)
                 vis_final_up = cv2.resize(vis_final, (w_vis * upscale_factor, h_vis * upscale_factor), interpolation=cv2.INTER_NEAREST)

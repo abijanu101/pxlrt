@@ -35,8 +35,7 @@ class RegionOptimizer:
             x, y, w, h = current_bbox
             candidates = [
                 (x + self.step_size, y, w, h), (x - self.step_size, y, w, h),
-                (x, y + self.step_size, w, h), (x, y - self.step_size, w, h),
-                (x, y, w + self.step_size, h + self.step_size), (x, y, w - self.step_size, h - self.step_size),
+                (x, y + self.step_size, w, h), (x, y - self.step_size, w, h)
             ]
             for cx, cy, cw, ch in candidates:
                 if cx < 0 or cy < 0 or cx + cw > img_w or cy + ch > img_h or cw < 8 or ch < 8:
